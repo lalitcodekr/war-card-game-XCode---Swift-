@@ -47,14 +47,14 @@ struct ContentView: View {
                     Spacer()
                     VStack{
                         Text("Player")
-                            .padding(.bottom,10)
+                            .padding(.bottom,12)
                         Text(String(playerScore))
                             .font(.largeTitle)
                     }
                     Spacer()
                     VStack{
                         Text("CPU")
-                            .padding(.bottom,10)
+                            .padding(.bottom,12)
                         Text(String(cpuScore))
                             .font(.largeTitle)
                     }
