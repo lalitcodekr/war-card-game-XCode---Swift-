@@ -1,87 +1,124 @@
-//
-//  ContentView.swift
-//  war card game
-//
-//  Created by Pyda Lalit Kumar on 13/01/25.
-//
-
 import SwiftUI
 
 struct ContentView: View {
-    
-    @State var playerCard = "card7"
-    @State var cpuCard = "card13"
+    @State var playerCard = "back"
+    @State var cpuCard = "back"
     
     @State var playerScore = 0
     @State var cpuScore = 0
     
+    @State var playerCardRotation = 0.0
+    @State var cpuCardRotation = 0.0
+    
+    @State var isShowingCards = false
+    
     var body: some View {
-        
-        ZStack{
+        ZStack {
             Image("background-plain")
                 .resizable()
                 .ignoresSafeArea()
             
-            VStack{
+            VStack {
                 Spacer()
                 Image("logo")
                 Spacer()
-                HStack{
+                HStack {
                     Spacer()
+                    // Player card with rotation and mirroring fix
                     Image(playerCard)
+                        .rotation3DEffect(
+                            .degrees(playerCardRotation),
+                            axis: (x: 0.0, y: 1.0, z: 0.0),
+                            perspective: 0.8
+                        )
+                        .scaleEffect(x: playerCardRotation.truncatingRemainder(dividingBy: 360) > 90 &&
+                                     playerCardRotation.truncatingRemainder(dividingBy: 360) < 270 ? -1 : 1)
                     Spacer()
+                    // CPU card with rotation and mirroring fix
                     Image(cpuCard)
+                        .rotation3DEffect(
+                            .degrees(cpuCardRotation),
+                            axis: (x: 0.0, y: 1.0, z: 0.0),
+                            perspective: 0.8
+                        )
+                        .scaleEffect(x: cpuCardRotation.truncatingRemainder(dividingBy: 360) > 90 &&
+                                     cpuCardRotation.truncatingRemainder(dividingBy: 360) < 270 ? -1 : 1)
                     Spacer()
                 }
                 Spacer()
                 
                 Button {
-                    deal()
+                    if !isShowingCards {
+                        dealWithAnimation()
+                    }
                 } label: {
                     Image("button")
                 }
-
                 
                 Spacer()
-                HStack{
+                HStack {
                     Spacer()
-                    VStack{
+                    VStack {
                         Text("Player")
-                            .padding(.bottom,12)
+                            .padding(.bottom)
                         Text(String(playerScore))
                             .font(.largeTitle)
                     }
                     Spacer()
-                    VStack{
+                    VStack {
                         Text("CPU")
-                            .padding(.bottom,12)
+                            .padding(.bottom)
                         Text(String(cpuScore))
                             .font(.largeTitle)
                     }
                     Spacer()
-                }.foregroundColor(.white).font(.headline)
+                }
+                .foregroundColor(.white)
+                .font(.headline)
                 Spacer()
             }
         }
     }
     
-    func deal() {
-        // Randomize the player card
-        var playerCardValue = Int.random(in: 2...14)
-        playerCard = "card" + String(playerCardValue)
+    func dealWithAnimation() {
+        isShowingCards = true
         
-        // Randomize the cpu card
-        var cpuCardValue = Int.random(in: 2...14)
-        cpuCard = "card" + String(cpuCardValue)
+        // Generate new card values
+        let playerCardValue = Int.random(in: 2...14)
+        let cpuCardValue = Int.random(in: 2...14)
         
-        // Update the scores
-        if playerCardValue > cpuCardValue {
-            // Add 1 to player score
-            playerScore += 1
+        // Animate the cards flipping
+        withAnimation(.easeInOut(duration: 0.3)) {
+            playerCardRotation += 180
+            cpuCardRotation += 180
         }
-        else if playerCardValue < cpuCardValue {
-            // Add 1 to cpu score
-            cpuScore += 1
+        
+        // After half the animation duration, update the card images
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+            playerCard = "card" + String(playerCardValue)
+            cpuCard = "card" + String(cpuCardValue)
+            
+            // Update scores
+            if playerCardValue > cpuCardValue {
+                playerScore += 1
+            } else if playerCardValue < cpuCardValue {
+                cpuScore += 1
+            }
+        }
+        
+        // After 3 seconds, flip the cards back
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            withAnimation(.easeInOut(duration: 0.5)) {
+                playerCardRotation += 180
+                cpuCardRotation += 180
+            }
+            
+            // Update the card images back to "back" halfway through the animation
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                playerCard = "back"
+                cpuCard = "back"
+                isShowingCards = false
+            }
         }
     }
 }
