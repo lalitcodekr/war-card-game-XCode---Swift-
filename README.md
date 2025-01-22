@@ -1,6 +1,6 @@
 # SwiftUI War Card Game
 
-An interactive iOS card game developed with SwiftUI, where players compete against the CPU in a classic "War" card game. Each round, both the player and the CPU draw a random card; the higher card wins the round, earning a point. The game continues indefinitely, providing endless entertainment.
+An interactive iOS card game developed with SwiftUI, where players compete against the CPU in a classic "War" card game. In each round, both the player and the CPU draw a random card; the higher card wins the round, earning a point. The game continues indefinitely, providing endless entertainment.
 
 ## Features
 
@@ -11,11 +11,11 @@ An interactive iOS card game developed with SwiftUI, where players compete again
 
 ## Screenshots
 
-![Gameplay Screenshot](path_to_screenshot1)
-*In-game screen displaying the card draw and score.*
+![Gameplay Screenshot]()
+*The in-game screen displays the card draw and score.*
 
 ![Winning Screen](path_to_screenshot2)
-*Screen presented when the player wins a round.*
+*A screen is presented when the player wins a round.*
 
 ## Installation
 
@@ -38,7 +38,7 @@ The player with the higher card wins the round and earns a point.
 Scores are updated and displayed after each round.
 Continue Playing:
 Repeat the draw to continue playing.
-Acknowledgements
+Acknowledgments
 
 This project was inspired by and developed with guidance from the Code with Chris tutorial series.
 
