@@ -16,6 +16,11 @@
 			path = "war card game";
 			sourceTree = "<group>";
 		};
+		74A759F02D40BFC500420CAA /* ScreenShots */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ScreenShots;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,6 +39,7 @@
 			children = (
 				747382B12D34F11200FFE682 /* war card game */,
 				747382B02D34F11200FFE682 /* Products */,
+				74A759F02D40BFC500420CAA /* ScreenShots */,
 			);
 			sourceTree = "<group>";
 		};
@@ -62,6 +68,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				747382B12D34F11200FFE682 /* war card game */,
+				74A759F02D40BFC500420CAA /* ScreenShots */,
 			);
 			name = "war card game";
 			packageProductDependencies = (
