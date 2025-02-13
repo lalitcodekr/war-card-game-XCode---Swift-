@@ -14,7 +14,7 @@ An interactive iOS card game developed with SwiftUI, where players compete again
 ![Gameplay Screenshot](Screenshots/initial.png)
 *The in-game screen displays the card draw and score.*
 
-![Winning Screen](path_to_screenshot2)
+![Winning Screen](Screenshots/winning.png)
 *A screen is presented when the player wins a round.*
 
 ## Installation
